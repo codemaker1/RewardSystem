@@ -16,6 +16,8 @@ public interface TransactionRepo extends JpaRepository<Transaction, Long> {
 
     List<Transaction> findByDateAfter(LocalDateTime date);
 
+    List<Transaction> findByUserIdAndDateAfter(int userId, LocalDateTime date);
+
     @Query("SELECT t FROM Transaction t WHERE t.date >= :fromDate")
     List<Transaction> findLast3Months(@Param("fromDate") LocalDateTime fromDate);
 }

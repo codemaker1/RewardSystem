@@ -46,12 +46,20 @@ public class RewardsService {
         return transactionRepo.save(transaction);
     }
 
-    public List<RewardPoints> getRewardPoints() {
-        List<RewardPoints> res = new ArrayList<>();
+    public List<RewardPoints> getRewardPointsForAll() {
         LocalDateTime threeMonthsAgo = LocalDateTime.now().minusMonths(3);
-
         List<Transaction> lastThreeMonthTrans = transactionRepo.findByDateAfter(threeMonthsAgo);
+        return getRewardPoints(lastThreeMonthTrans);
+    }
 
+    public List<RewardPoints> getRewardPointsForUser(int userId) {
+        LocalDateTime threeMonthsAgo = LocalDateTime.now().minusMonths(3);
+        List<Transaction> lastThreeMonthTrans = transactionRepo.findByUserIdAndDateAfter(userId, threeMonthsAgo);
+        return getRewardPoints(lastThreeMonthTrans);
+    }
+
+    public List<RewardPoints> getRewardPoints(List<Transaction> lastThreeMonthTrans) {
+        List<RewardPoints> res = new ArrayList<>();
         Map<Integer, List<Transaction>> userTransaction = lastThreeMonthTrans.stream().
                 collect(Collectors.groupingBy(Transaction::getUserId));
 

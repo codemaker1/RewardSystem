@@ -37,7 +37,12 @@ public class RewardsController {
 
     @GetMapping("/get/points")
     public List<RewardPoints> getRewardPoints(){
-        return rewardsService.getRewardPoints();
+        return rewardsService.getRewardPointsForAll();
+    }
+
+    @GetMapping("/get/points/{userId}")
+    public List<RewardPoints> getRewardPointsForUser(@PathVariable int userId){
+        return rewardsService.getRewardPointsForUser(userId);
     }
 
 
