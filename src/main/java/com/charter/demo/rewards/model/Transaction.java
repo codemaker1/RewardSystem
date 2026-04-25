@@ -4,11 +4,13 @@ package com.charter.demo.rewards.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
+@Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name = "transactions")
